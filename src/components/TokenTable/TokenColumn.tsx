@@ -6,6 +6,7 @@ import DetailedTokenCard from './DetailedTokenCard';
 import TokenModal from './TokenModal';
 import LoadingSkeleton from './LoadingSkeleton';
 import ColumnHeader from './ColumnHeader';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 interface TokenColumnProps {
   title: string;
@@ -49,29 +50,31 @@ const TokenColumn = memo(({ title, status }: TokenColumnProps) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-background border border-border">
-      <ColumnHeader title={title} />
+    <ErrorBoundary>
+      <div className="flex flex-col h-full bg-background border border-border">
+        <ColumnHeader title={title} />
 
-      <div className="flex-1 overflow-y-auto space-y-2 p-2">
-        {isLoading ? (
-          <LoadingSkeleton />
-        ) : (
-          filteredAndSortedTokens.map(token => (
-            <DetailedTokenCard
-              key={token.id}
-              token={token}
-              onClick={handleTokenClick}
-            />
-          ))
-        )}
+        <div className="flex-1 overflow-y-auto space-y-2 p-2">
+          {isLoading ? (
+            <LoadingSkeleton />
+          ) : (
+            filteredAndSortedTokens.map(token => (
+              <DetailedTokenCard
+                key={token.id}
+                token={token}
+                onClick={handleTokenClick}
+              />
+            ))
+          )}
+        </div>
+
+        <TokenModal
+          token={selectedToken}
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+        />
       </div>
-
-      <TokenModal
-        token={selectedToken}
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-      />
-    </div>
+    </ErrorBoundary>
   );
 });
 

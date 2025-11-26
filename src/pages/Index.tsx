@@ -8,6 +8,7 @@ import { mockWebSocket } from '@/services/mockWebSocket';
 import TokenColumn from '@/components/TokenTable/TokenColumn';
 import TopNav from '@/components/Layout/TopNav';
 import PulseHeader from '@/components/Layout/PulseHeader';
+import { Toaster } from '@/components/ui/sonner';
 
 function TokenDashboard() {
   const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ function TokenDashboard() {
           <TokenColumn title="Migrated" status="migrated" />
         </div>
       </main>
+      <Toaster position="top-right" />
     </div>
   );
 }
