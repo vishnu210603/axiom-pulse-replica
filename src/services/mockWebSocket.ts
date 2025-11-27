@@ -45,6 +45,7 @@ export class MockWebSocketService {
           priceChange24h: parseFloat(newPriceChange.toFixed(2)),
         };
 
+        console.log('📊 Mock WebSocket: Updating token', token.symbol, 'Price:', update.price, 'Change:', update.priceChange24h + '%');
         this.listeners.forEach(listener => listener(update));
       });
     }, 2000); // Update every 2 seconds
