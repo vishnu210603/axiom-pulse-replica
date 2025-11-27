@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { toast } from 'sonner';
+import PriceCell from './PriceCell';
 
 interface DetailedTokenCardProps {
   token: Token;
@@ -218,10 +219,10 @@ const DetailedTokenCard = memo(({ token, onClick }: DetailedTokenCardProps) => {
         </div>
 
         {/* Price Info */}
-        <div className="text-right">
+        <div className="text-right space-y-1">
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="text-xs text-muted-foreground mb-0.5 cursor-help">
+              <div className="text-xs text-muted-foreground cursor-help">
                 MC <span className="text-primary font-medium">{formatNumber(token.marketCap)}</span>
               </div>
             </TooltipTrigger>
@@ -229,7 +230,7 @@ const DetailedTokenCard = memo(({ token, onClick }: DetailedTokenCardProps) => {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="text-sm font-bold mb-0.5 cursor-help">
+              <div className="text-sm font-bold cursor-help">
                 <span className={token.priceChange24h >= 0 ? 'text-success' : 'text-destructive'}>
                   V {formatNumber(token.volume24h)}
                 </span>
@@ -237,8 +238,12 @@ const DetailedTokenCard = memo(({ token, onClick }: DetailedTokenCardProps) => {
             </TooltipTrigger>
             <TooltipContent>24h Volume: ${token.volume24h.toLocaleString()}</TooltipContent>
           </Tooltip>
-          <div className="text-xs text-muted-foreground mb-0.5">
-            V ${Math.floor(token.price)}
+          <div className="flex justify-end">
+            <PriceCell 
+              price={token.price} 
+              change={token.priceChange24h} 
+              lastUpdate={token.lastUpdate} 
+            />
           </div>
           <div className="flex items-center justify-end gap-1 text-[10px] text-muted-foreground">
             <span>F =</span>
