@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { Token } from '@/store/slices/tokensSlice';
 import { Edit, Link2, Search, ThumbsUp, ThumbsDown, Flag, Users, Globe, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -12,7 +12,7 @@ interface DetailedTokenCardProps {
   onClick: (token: Token) => void;
 }
 
-const DetailedTokenCard = memo(({ token, onClick }: DetailedTokenCardProps) => {
+const DetailedTokenCard = ({ token, onClick }: DetailedTokenCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const formatNumber = (num: number) => {
@@ -337,8 +337,6 @@ const DetailedTokenCard = memo(({ token, onClick }: DetailedTokenCardProps) => {
     </div>
     </TooltipProvider>
   );
-});
-
-DetailedTokenCard.displayName = 'DetailedTokenCard';
+};
 
 export default DetailedTokenCard;

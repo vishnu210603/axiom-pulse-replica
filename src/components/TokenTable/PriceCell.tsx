@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -8,7 +8,7 @@ interface PriceCellProps {
   lastUpdate: number;
 }
 
-const PriceCell = memo(({ price, change, lastUpdate }: PriceCellProps) => {
+const PriceCell = ({ price, change, lastUpdate }: PriceCellProps) => {
   const [isFlashing, setIsFlashing] = useState(false);
   const [prevPrice, setPrevPrice] = useState(price);
 
@@ -48,8 +48,6 @@ const PriceCell = memo(({ price, change, lastUpdate }: PriceCellProps) => {
       </div>
     </div>
   );
-});
-
-PriceCell.displayName = 'PriceCell';
+};
 
 export default PriceCell;
