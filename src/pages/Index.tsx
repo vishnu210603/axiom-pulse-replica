@@ -23,6 +23,7 @@ function TokenDashboard() {
 
     // Subscribe to WebSocket updates
     const unsubscribe = mockWebSocket.subscribe((update) => {
+      console.log('💰 Received price update:', update);
       dispatch(updateTokenPrice(update));
     });
 
